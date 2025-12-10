@@ -7,7 +7,5 @@
     "christian-kohler.path-intellisense",
     "streetsidesoftware.code-spell-checker"
   ],
-  "unwantedRecommendations": [
-    "esbenp.prettier-vscode"
-  ]
+  "unwantedRecommendations": ["esbenp.prettier-vscode"]
 }
