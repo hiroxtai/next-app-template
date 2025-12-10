@@ -1,36 +1,130 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js App Template
 
-## Getting Started
+[Next.js](https://nextjs.org) をベースにしたモダンな Web アプリケーションテンプレートです。
 
-First, run the development server:
+## 技術スタック
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **フレームワーク**: [Next.js 16](https://nextjs.org) (App Router)
+- **言語**: [TypeScript](https://www.typescriptlang.org)
+- **パッケージマネージャー**: [pnpm](https://pnpm.io)
+- **スタイリング**: [Tailwind CSS v4](https://tailwindcss.com)
+- **リンター/フォーマッター**: [Biome](https://biomejs.dev)
+- **コンパイラ**: [React Compiler](https://react.dev/learn/react-compiler)
+
+## プロジェクト構成
+
+```
+next-app-template/
+├── .devcontainer/          # Dev Container 設定
+├── .vscode/                # VS Code 設定
+│   ├── extensions.json     # 推奨拡張機能
+│   ├── launch.json         # デバッグ設定
+│   └── settings.json       # エディター設定
+├── public/                 # 静的ファイル
+├── src/
+│   └── app/                # App Router
+│       ├── globals.css     # グローバルスタイル
+│       ├── layout.tsx      # ルートレイアウト
+│       └── page.tsx        # トップページ
+├── biome.json              # Biome 設定
+├── next.config.ts          # Next.js 設定
+├── postcss.config.mjs      # PostCSS 設定
+└── tsconfig.json           # TypeScript 設定
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 開発環境のセットアップ
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### ローカル環境
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. 依存関係のインストール:
 
-## Learn More
+```bash
+pnpm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+2. 開発サーバーの起動:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. ブラウザで [http://localhost:3000](http://localhost:3000) を開く
 
-## Deploy on Vercel
+### Dev Container
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+VS Code の Dev Container 機能を使用して、統一された開発環境で作業できます。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. VS Code で拡張機能 [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) をインストール
+2. プロジェクトを開く
+3. コマンドパレット (`Cmd+Shift+P`) から `Dev Containers: Reopen in Container` を選択
+
+Dev Container には以下が含まれます:
+
+- Node.js 22
+- pnpm
+- 推奨 VS Code 拡張機能の自動インストール
+- 統一されたエディター設定
+
+## スクリプト
+
+```bash
+# 開発サーバーの起動
+pnpm dev
+
+# プロダクションビルド
+pnpm build
+
+# プロダクションサーバーの起動
+pnpm start
+
+# コードのリント
+pnpm lint
+
+# コードのフォーマット
+pnpm format
+```
+
+## VS Code 拡張機能
+
+以下の拡張機能の使用を推奨します（Dev Container では自動インストールされます）:
+
+- [Biome](https://marketplace.visualstudio.com/items?itemName=biomejs.biome) - リンター/フォーマッター
+- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) - Tailwind CSS の補完
+- [Auto Rename Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag) - HTML/JSX タグの自動リネーム
+- [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense) - ファイルパスの補完
+- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) - スペルチェック
+
+## デバッグ
+
+VS Code のデバッグ機能を使用できます:
+
+- **Next.js: debug server-side** - サーバーサイドのデバッグ
+- **Next.js: debug client-side** - クライアントサイドのデバッグ（Chrome）
+- **Next.js: debug full stack** - フルスタックデバッグ
+
+## コード規約
+
+- **フォーマット**: Biome による自動フォーマット（保存時に実行）
+- **インポート**: 自動整理（保存時に実行）
+- **インデント**: 2 スペース
+- **Import Alias**: `@/*` で `src/` を参照
+
+## 参考リソース
+
+- [Next.js Documentation](https://nextjs.org/docs) - Next.js の機能と API
+- [React Documentation](https://react.dev) - React の公式ドキュメント
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs) - Tailwind CSS の使い方
+- [Biome Documentation](https://biomejs.dev) - Biome の設定方法
+- [TypeScript Documentation](https://www.typescriptlang.org/docs) - TypeScript ガイド
+
+## デプロイ
+
+### Vercel
+
+最も簡単な方法は [Vercel Platform](https://vercel.com/new) を使用することです。
+
+詳細は [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) を参照してください。
+
+## ライセンス
+
+MIT
