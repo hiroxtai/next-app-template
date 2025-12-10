@@ -14,7 +14,7 @@
 
   // コンテナ作成時に設定される環境変数
   "containerEnv": {
-    "PNPM_STORE_DIR": "${containerWorkspaceFolder}/.pnpm-store"
+    "PNPM_STORE_DIR": "/workspaces/${localWorkspaceFolderBasename}/.pnpm-store"
   },
 
   // コンテナ起動後に設定される環境変数
