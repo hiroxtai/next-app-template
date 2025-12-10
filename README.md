@@ -16,6 +16,11 @@
 ```
 next-app-template/
 ├── .devcontainer/          # Dev Container 設定
+├── .github/
+│   └── workflows/          # GitHub Actions ワークフロー
+│       ├── ci.yml          # CI パイプライン
+│       ├── format.yml      # フォーマットチェック
+│       └── dependency-review.yml  # 依存関係レビュー
 ├── .vscode/                # VS Code 設定
 │   ├── extensions.json     # 推奨拡張機能
 │   ├── launch.json         # デバッグ設定
@@ -82,7 +87,44 @@ pnpm lint
 
 # コードのフォーマット
 pnpm format
+
+# 型チェック
+pnpm type-check
 ```
+
+## CI/CD
+
+このプロジェクトでは GitHub Actions を使用した CI/CD パイプラインが構築されています。
+
+### ワークフロー
+
+#### CI (`.github/workflows/ci.yml`)
+
+プッシュまたはプルリクエスト時に自動実行:
+
+- **Lint and Type Check**: Biome によるコード品質チェックと TypeScript の型チェック
+- **Build**: Next.js アプリケーションのプロダクションビルド
+  - Next.js ビルドキャッシュを活用して高速化
+  - ビルド成果物を 7 日間保持
+
+#### Format Check (`.github/workflows/format.yml`)
+
+プルリクエスト時に実行:
+
+- Biome によるコードフォーマットのチェック
+- フォーマットエラーがある場合は PR にコメントで通知
+
+#### Dependency Review (`.github/workflows/dependency-review.yml`)
+
+プルリクエスト時に実行:
+
+- 依存関係の脆弱性チェック
+- moderate 以上の深刻度の脆弱性を検出時に失敗
+- PR に結果のサマリーを自動コメント
+
+### バッジ
+
+[![CI](https://github.com/hiroxtai/next-app-template/actions/workflows/ci.yml/badge.svg)](https://github.com/hiroxtai/next-app-template/actions/workflows/ci.yml)
 
 ## VS Code 拡張機能
 
