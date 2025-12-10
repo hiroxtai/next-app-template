@@ -1,0 +1,78 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+  "name": "Node.js & TypeScript",
+  // Or use a Dockerfile or Docker Compose file.
+  // More info: https://containers.dev/guide/dockerfile
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+
+  // node_modulesと.pnpm-storeをボリュームマウントして高速化
+  "mounts": [
+    {
+      "source": "${localWorkspaceFolderBasename}-node_modules",
+      "target": "${containerWorkspaceFolder}/node_modules",
+      "type": "volume"
+    },
+    {
+      "source": "global-pnpm-store",
+      "target": "${containerWorkspaceFolder}/.pnpm-store",
+      "type": "volume"
+    }
+  ],
+
+  // Features to add to the dev container.
+  // More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers-extra/features/pnpm:2": {}
+  },
+
+  // コンテナ内のポートをローカルで利用可能にする
+  "forwardPorts": [3000],
+
+  // コンテナ作成後に実行するコマンド
+  // ボリュームの権限を設定してから依存関係をインストール
+  "postCreateCommand": "sudo chown -R node:node ${containerWorkspaceFolder}/.pnpm-store ${containerWorkspaceFolder}/node_modules && pnpm install",
+
+  // ツール固有のプロパティを設定
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "biomejs.biome",
+        "bradlc.vscode-tailwindcss",
+        "ms-vscode.vscode-typescript-next"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "biomejs.biome",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "quickfix.biome": "explicit",
+          "source.organizeImports.biome": "explicit"
+        },
+        "[typescript]": {
+          "editor.defaultFormatter": "biomejs.biome"
+        },
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "biomejs.biome"
+        },
+        "[javascript]": {
+          "editor.defaultFormatter": "biomejs.biome"
+        },
+        "[javascriptreact]": {
+          "editor.defaultFormatter": "biomejs.biome"
+        },
+        "files.associations": {
+          "*.css": "tailwindcss"
+        },
+        "tailwindCSS.experimental.classRegex": [
+          ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+          ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+        ]
+      }
+    }
+  },
+
+  // Uncomment to connect as root instead.
+  // More info: https://aka.ms/dev-containers-non-root.
+  "remoteUser": "node"
+}
