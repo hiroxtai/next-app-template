@@ -6,6 +6,18 @@
   // More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
 
+  // Features to add to the dev container.
+  // More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers-extra/features/pnpm:2": {}
+  },
+
+  // 環境変数を設定する
+  "remoteEnv": {
+    "PNPM_STORE_DIR": "${containerWorkspaceFolder}/.pnpm-store",
+    "NODE_ENV": "development"
+  },
+
   // node_modulesと.pnpm-storeをボリュームマウントして高速化
   "mounts": [
     {
@@ -19,12 +31,6 @@
       "type": "volume"
     }
   ],
-
-  // Features to add to the dev container.
-  // More info: https://containers.dev/features.
-  "features": {
-    "ghcr.io/devcontainers-extra/features/pnpm:2": {}
-  },
 
   // コンテナ内のポートをローカルで利用可能にする
   "forwardPorts": [3000],
