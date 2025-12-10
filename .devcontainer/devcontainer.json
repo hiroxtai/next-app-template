@@ -40,8 +40,8 @@
   "forwardPorts": [3000],
 
   // コンテナ作成後に実行するコマンド
-  // ボリュームの権限を設定してから依存関係をインストール
-  "postCreateCommand": "sudo chown -R node:node ${containerWorkspaceFolder}/.pnpm-store ${containerWorkspaceFolder}/node_modules && pnpm install",
+  // .npmrcをコピーしてボリュームの権限を設定してから依存関係をインストール
+  "postCreateCommand": "cp .devcontainer/.npmrc .npmrc && sudo chown -R node:node ${containerWorkspaceFolder}/.pnpm-store ${containerWorkspaceFolder}/node_modules && pnpm install",
 
   // ツール固有のプロパティを設定
   "customizations": {
