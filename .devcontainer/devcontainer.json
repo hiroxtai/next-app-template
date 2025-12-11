@@ -29,9 +29,14 @@
   // コンテナ内のポートをローカルで利用可能にする
   "forwardPorts": [3000],
 
-  // コンテナ作成後に実行するコマンド
-  // pnpmのstore-dirを設定してボリュームの権限を設定してから依存関係をインストール
-  "postCreateCommand": "pnpm config set store-dir ${containerWorkspaceFolder}/.pnpm-store && sudo chown -R node:node ${containerWorkspaceFolder}/.pnpm-store ${containerWorkspaceFolder}/node_modules && pnpm install",
+  // コンテナ作成時に実行（初回のみ、キャッシュ可能）
+  "onCreateCommand": {
+    "config": "pnpm config set store-dir ${containerWorkspaceFolder}/.pnpm-store",
+    "permissions": "sudo chown -R node:node ${containerWorkspaceFolder}/.pnpm-store ${containerWorkspaceFolder}/node_modules"
+  },
+
+  // コンテンツ更新時に実行（依存関係のインストール/更新）
+  "updateContentCommand": "pnpm install",
 
   // ツール固有のプロパティを設定
   "customizations": {
