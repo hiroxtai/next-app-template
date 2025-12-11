@@ -12,16 +12,6 @@
     "ghcr.io/devcontainers-extra/features/pnpm:2": {}
   },
 
-  // コンテナ作成時に設定される環境変数
-  "containerEnv": {
-    "PNPM_STORE_DIR": "/workspaces/next-app-template/.pnpm-store"
-  },
-
-  // コンテナ起動後に設定される環境変数
-  "remoteEnv": {
-    "NODE_ENV": "development"
-  },
-
   // node_modulesと.pnpm-storeをボリュームマウントして高速化
   "mounts": [
     {
@@ -40,8 +30,8 @@
   "forwardPorts": [3000],
 
   // コンテナ作成後に実行するコマンド
-  // .npmrcをコピーしてボリュームの権限を設定してから依存関係をインストール
-  "postCreateCommand": "cp .devcontainer/.npmrc .npmrc && sudo chown -R node:node ${containerWorkspaceFolder}/.pnpm-store ${containerWorkspaceFolder}/node_modules && pnpm install",
+  // pnpmのstore-dirを設定してボリュームの権限を設定してから依存関係をインストール
+  "postCreateCommand": "pnpm config set store-dir ${containerWorkspaceFolder}/.pnpm-store && sudo chown -R node:node ${containerWorkspaceFolder}/.pnpm-store ${containerWorkspaceFolder}/node_modules && pnpm install",
 
   // ツール固有のプロパティを設定
   "customizations": {
