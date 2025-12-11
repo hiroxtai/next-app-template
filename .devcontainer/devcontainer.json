@@ -29,6 +29,9 @@
   // コンテナ内のポートをローカルで利用可能にする
   "forwardPorts": [3000],
 
+  // 指定されたコマンドが完了するまで待機する
+  "waitFor": "onCreateCommand",
+
   // コンテナ作成時に実行（初回のみ、キャッシュ可能）
   "onCreateCommand": {
     "config": "pnpm config set store-dir ${containerWorkspaceFolder}/.pnpm-store",
